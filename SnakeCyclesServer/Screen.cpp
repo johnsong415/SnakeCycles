@@ -47,7 +47,7 @@ void Board::UpdatePlayer(Player* player)
 		SendCommand updateCommand;
 		updateCommand.coordinates = *head;
 		updateCommand.sentCommand = NEWLOC;
-		SendToClient(m_playerSet, updateCommand);
+		SendToClients(m_playerSet, updateCommand);
 	}
 	else {
 		KillPlayer(player);
@@ -65,18 +65,18 @@ void Board::KillPlayer(Player* player)
 			if (m_map[x][y] == player->GetTeam()) {
 				killCommand.coordinates.x = x;
 				killCommand.coordinates.y = y;
-				SendToClient(m_playerSet, killCommand);
+				SendToClients(m_playerSet, killCommand);
 				m_map[x][y] = EMPTY;
 			}
 		}
 	}
 }
 
-void Board::AddPlayer(Player* player, SOCKET clientSocket, int index)
+void Board::AddPlayer(Team playerTeam, SOCKET clientSocket, int index)
 {
 	PlayerAndSocket client;
 	client.clientSocket = clientSocket;
-	client.player = player;
+	client.player = &Player(playerTeam);
 	m_players[index] = client;
 }
 

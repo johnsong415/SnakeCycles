@@ -12,7 +12,8 @@ public:
 	void Update();
 	void UpdatePlayer(Player* player);
 	void KillPlayer(Player* player);
-	void AddPlayer(Player* player, SOCKET clientSocket, int index);
+	//void AddPlayer(Player* player, SOCKET clientSocket, int index);
+	void AddPlayer(Team playerTeam, SOCKET clientSocket, int index);
 	void SetSockets(fd_set sockets);
 	void ChangePlayerDirection(int index, Direction newDirection);
 	bool GameValid();

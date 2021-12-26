@@ -24,7 +24,7 @@ private:
 
 private:
 	// Is WSA started up?
-	static bool WSAInit;
+	bool WSAInit;
 	SOCKET m_socket;
 	ClientSockets m_clientSockets;
 	//fd_set m_clientSockets;

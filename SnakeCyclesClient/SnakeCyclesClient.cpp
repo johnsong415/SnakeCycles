@@ -2,9 +2,9 @@
 #include "SnakeCyclesClient.h"
 #include "Screen.h"
 #include "Communication.h"
-#include "Types.h"
+#include "Types.h";
 
-#include <string>
+#include <string>;
 
 #define MAX_LOADSTRING 100
 
@@ -68,7 +68,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     ULONG buffer;
     IN_ADDR transportAddress;
-    inet_pton(AF_INET, "127.0.0.1", &buffer);
+    inet_pton(AF_INET, "192.168.0.82", &buffer);
     transportAddress.S_un.S_addr = buffer;
 
 

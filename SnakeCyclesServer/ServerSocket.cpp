@@ -3,18 +3,18 @@
 ServerSocket::ServerSocket()
 {
     FD_ZERO(&m_clientSockets);
-	if (WSAInit == false) {
-        WSADATA winSockInfo;
+	//if (WSAInit == false) {
+    WSADATA winSockInfo;
 
-        WORD version = MAKEWORD(2, 2);
-        int initialized = WSAStartup(version, &winSockInfo);
-        if (initialized != 0) {
-            int errCode = WSAGetLastError();
-            printf("WSA start up failed - Error code: %d\n", errCode);
-            return;
-        }
-        WSAInit = true;
-	}
+    WORD version = MAKEWORD(2, 2);
+    int initialized = WSAStartup(version, &winSockInfo);
+    if (initialized != 0) {
+        int errCode = WSAGetLastError();
+        printf("WSA start up failed - Error code: %d\n", errCode);
+        return;
+    }
+    WSAInit = true;
+	//}
     
     m_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     if (m_socket == INVALID_SOCKET) {
@@ -51,6 +51,7 @@ bool ServerSocket::Bind(const char* ipAddr, int port)
         WSACleanup();
         return false;
     }
+    return true;
 }
 
 bool ServerSocket::Listen(const char* ipAddr, int port)
@@ -137,6 +138,7 @@ bool ServerSocket::StartGame(Board* board)
         }
         m_clientSockets.Send(startMessage, i);
     }
+    return true;
 }
 
 bool ServerSocket::EndGame()
@@ -145,6 +147,7 @@ bool ServerSocket::EndGame()
     endMessage.sentCommand = ENDGAME;
     m_clientSockets.Send(endMessage);
     this->~ServerSocket();
+    return true;
 }
 
 bool ServerSocket::Send(SendCommand commandToSend)
